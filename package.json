@@ -11,7 +11,7 @@
     "url": "git+https://github.com/shacharyaron/reddit-feed.git"
   },
   "author": "Shachar Yaron",
-  "license": "ISC",
+  "license": "Apache License 2.0",
   "bugs": {
     "url": "https://github.com/shacharyaron/reddit-feed/issues"
   },
