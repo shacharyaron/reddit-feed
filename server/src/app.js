@@ -2,7 +2,6 @@ const express = require('express');
 const app = express();
 const axios = require("axios");
 
-const REQUEST_CONFIG = { headers: { "Content-Type": "application/json" } };
 const port = 3000;
 
 const REDDIT_URL = "https://www.reddit.com";
@@ -23,12 +22,11 @@ let getTopArticles = async (subreddit, limit = 10) => {
         redditResponse = await axios.get(
             `${REDDIT_URL}/r/${subreddit}/top/.json`,
             {
-                t: 'all',
+                't': 'all',
                 'limit': limit,
             });
     } catch (error) {
         console.log(`Internal server error.`);
-        console.log(error.response.data.msg);
         console.log(error.response.data.error);
         throw new Error('Unable to get a token.')
     }
