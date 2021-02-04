@@ -30,7 +30,7 @@ const getTopArticles = async (subreddit, limit = 10) => {
             {
                 params: {
                     't': 'all',
-                    'limit': 1
+                    'limit': limit
                 }
             });
     } catch (error) {
