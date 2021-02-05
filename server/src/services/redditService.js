@@ -1,5 +1,6 @@
 const axios = require('axios');
 const ApiError = require("../errors/ApiError");
+const logger = require("../utils/logger");
 
 const REDDIT_URL = "https://www.reddit.com";
 
@@ -15,7 +16,7 @@ const getTopArticlesFromSubreddit = async (subreddit, limit) => {
                 }
             });
     } catch (error) {
-        console.log(error); //todo change to logger
+        logger.error(error)
         throw new ApiError(`Request to Reddit failed: '${error.response.statusText}'`, error.response.status);
     }
 
@@ -49,7 +50,7 @@ const parse = (response) => {
             articles: parsedArticles
         };
     } catch (error) {
-        console.log(error); //todo change to logger
+        logger.error(error)
         throw new ApiError(`Failed parsing response from Reddit's server: '${error.message}'`, error.status)
     }
 }
