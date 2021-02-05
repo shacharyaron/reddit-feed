@@ -14,9 +14,7 @@ const getTopArticlesFromSubreddit = async (subreddit, limit = 50) => {
                 }
             });
     } catch (error) {
-        console.log(`Internal server error.`);
-        console.log(error.response.data.error);
-        throw new Error('Unable to get a token.')
+        throw new Error(`Could not make the request to reddit servers: "${error.message}".`);
     }
 
     return parse(redditResponse.data);
@@ -43,7 +41,7 @@ const parse = (response) => {
             articles: parsedArticles
         };
     } catch (error) {
-        throw new Error(`Failed parsing response from reddit server: ${error.message}`)
+        throw new Error(`Failed parsing response from reddit server: "${error.message}".`)
     }
 }
 
