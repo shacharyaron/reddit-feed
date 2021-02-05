@@ -1,4 +1,5 @@
-const axios = require("axios");
+const axios = require('axios');
+const ApiError = require("../errors/ApiError");
 
 const REDDIT_URL = "https://www.reddit.com";
 
@@ -14,7 +15,8 @@ const getTopArticlesFromSubreddit = async (subreddit, limit = 50) => {
                 }
             });
     } catch (error) {
-        throw new Error(`Could not make the request to reddit servers: "${error.message}".`);
+        console.log(error); //todo change to logger
+        throw new ApiError(`Could not make the request to reddit servers: '${error.message}'`, error.response.status);
     }
 
     return parse(redditResponse.data);
@@ -23,6 +25,12 @@ const getTopArticlesFromSubreddit = async (subreddit, limit = 50) => {
 const parse = (response) => {
     try {
         const rawArticles = response.data.children;
+
+        const isSubredditPresentInResponse = rawArticles[0];
+        if (!isSubredditPresentInResponse) {
+            throw new ApiError(`The requested subreddit might not exist`, 404)
+        }
+
         const parsedArticles = rawArticles.map(article => {
             return {
                 id: article.data.id,
@@ -41,7 +49,8 @@ const parse = (response) => {
             articles: parsedArticles
         };
     } catch (error) {
-        throw new Error(`Failed parsing response from reddit server: "${error.message}".`)
+        console.log(error); //todo change to logger
+        throw new ApiError(`Failed parsing response from Reddit's server: '${error.message}'`, error.status)
     }
 }
 
