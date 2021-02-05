@@ -3,7 +3,7 @@ const ApiError = require("../errors/ApiError");
 
 const REDDIT_URL = "https://www.reddit.com";
 
-const getTopArticlesFromSubreddit = async (subreddit, limit = 50) => {
+const getTopArticlesFromSubreddit = async (subreddit, limit) => {
     let redditResponse;
     try {
         redditResponse = await axios.get(
