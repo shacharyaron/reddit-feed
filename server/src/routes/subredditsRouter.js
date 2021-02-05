@@ -32,20 +32,24 @@ const getTopArticles = async (subreddit, limit = 50) => {
 
 const parse = (response) => {
     try {
-        const posts = response.data.children;
-        return posts.map(post => {
+        const rawArticles = response.data.children;
+        const parsedArticles = rawArticles.map(article => {
             return {
-                subreddit: post.data.subreddit,
-                id: post.data.id,
-                // type: post.kind, //todo: add custom type?
-                title: post.data.title,
-                author: post.data.author,
-                createdTimestamp: post.data.created_utc,
-                upvotes: post.data.ups,
-                url: post.data.url,
-                thumbnail: post.data.thumbnail || null,
+                id: article.data.id,
+                title: article.data.title,
+                text: article.data.selftext || null,
+                author: article.data.author,
+                createdTimestamp: article.data.created_utc,
+                upvotes: article.data.ups,
+                url: article.data.url,
+                thumbnail: article.data.thumbnail || null, //todo if not url return null
             };
         });
+
+        return {
+            subreddit: rawArticles[0].data.subreddit,
+            articles: parsedArticles
+        };
     } catch (error) {
         throw new Error(`Failed parsing response from reddit server: ${error.message}`)
     }
