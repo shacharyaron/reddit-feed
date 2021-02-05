@@ -10,7 +10,7 @@ router.get('/:subreddit', async (request, response) => {
     response.send(redditResponse);
 })
 
-const getTopArticles = async (subreddit, limit = 10) => {
+const getTopArticles = async (subreddit, limit = 50) => {
     let redditResponse;
     try {
         redditResponse = await axios.get(
@@ -27,7 +27,28 @@ const getTopArticles = async (subreddit, limit = 10) => {
         throw new Error('Unable to get a token.')
     }
 
-    return redditResponse.data;
+    return parse(redditResponse.data);
+}
+
+const parse = (response) => {
+    try {
+        const posts = response.data.children;
+        return posts.map(post => {
+            return {
+                subreddit: post.data.subreddit,
+                id: post.data.id,
+                // type: post.kind, //todo: add custom type?
+                title: post.data.title,
+                author: post.data.author,
+                createdTimestamp: post.data.created_utc,
+                upvotes: post.data.ups,
+                url: post.data.url,
+                thumbnail: post.data.thumbnail || null,
+            };
+        });
+    } catch (error) {
+        throw new Error(`Failed parsing response from reddit server: ${error.message}`)
+    }
 }
 
 module.exports = router;
