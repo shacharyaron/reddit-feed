@@ -16,7 +16,7 @@ const getTopArticlesFromSubreddit = async (subreddit, limit) => {
             });
     } catch (error) {
         console.log(error); //todo change to logger
-        throw new ApiError(`Could not make the request to reddit servers: '${error.message}'`, error.response.status);
+        throw new ApiError(`Request to Reddit failed: '${error.response.statusText}'`, error.response.status);
     }
 
     return parse(redditResponse.data);
