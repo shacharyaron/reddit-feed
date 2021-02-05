@@ -1,12 +1,7 @@
 const express = require('express');
 const router = express.Router();
+const subredditsController = require('../controllers/subredditsController');
 
-const redditService = require('../services/redditService');
-
-router.get('/:subreddit', async (request, response) => {
-    const postsLimit = request.query.limit || 10;
-    const redditResponse = await redditService.getTopArticlesFromSubreddit(request.params.subreddit, postsLimit);
-    response.send(redditResponse);
-})
+router.get('/:subreddit', subredditsController.getTopArticlesFromSubreddit);
 
 module.exports = router;
