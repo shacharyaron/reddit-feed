@@ -38,7 +38,7 @@ const SearchBar = props => {
     }
 
     return (
-        < div className='search-bar-container'>
+        < div className='search-bar-container shadow'>
 
             < div className='logo-container'>
                 <h1>reddit</h1>

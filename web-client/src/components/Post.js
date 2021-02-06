@@ -32,21 +32,30 @@ const Post = props => {
     };
 
     return (
-        <article className='post-container'>
+        <article className='post-container shadow'>
 
             <div className='post-header'>
                 <h1>{props.title}</h1>
-                <h3>{convertTimestampToLocalDate(props.createdTimestamp)}</h3>
             </div>
 
             <div className='post-content'>
-                {props.text}
+                <div className={'text'}>
+                    {props.text}
+                </div>
                 <Content url={props.url}/>
             </div>
 
             <div className='post-information'>
-                <h3 id='post-upvotes'>{convertToSiFormat(props.upvotes)}</h3>
-                <h3>{props.author}</h3>
+
+                <div className='author-date-container'>
+                    <h3 id='author'>Posted by {props.author}</h3>
+                    <h3 id='created-date'>{convertTimestampToLocalDate(props.createdTimestamp)}</h3>
+                </div>
+
+                <div className='upvotes-container'>
+                    <h3 id='post-upvotes'>{convertToSiFormat(props.upvotes)}</h3>
+                </div>
+
             </div>
 
         </article>
