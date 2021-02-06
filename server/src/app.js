@@ -1,4 +1,4 @@
-const logRequests = require("./middleware/logRequests");
+const requestsLogger = require("./middleware/requestsLogger");
 const errorHandler = require("./middleware/errorHandler");
 const routeDoesNotExistHandler = require("./middleware/routeDoesNotExistHandler");
 const express = require('express');
@@ -10,7 +10,7 @@ const port = process.env.PORT || 5000;
 const app = express();
 app.use(express.json());
 
-app.use(logRequests)
+app.use(requestsLogger)
 app.use('/api/v1/subreddits', subredditRouter);
 app.use(routeDoesNotExistHandler)
 app.use(errorHandler)
