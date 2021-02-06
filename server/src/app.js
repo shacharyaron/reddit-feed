@@ -5,14 +5,13 @@ const express = require('express');
 const logger = require("./utils/logger");
 const subredditRouter = require('./routes/subredditsRouter');
 
-//todo: change to correct port
-const port = process.env.PORT || 8080;
+const port = process.env.PORT || 5000;
 
 const app = express();
 app.use(express.json());
 
 app.use(logRequests)
-app.use('/v1/subreddits', subredditRouter);
+app.use('/api/v1/subreddits', subredditRouter);
 app.use(routeDoesNotExistHandler)
 app.use(errorHandler)
 
