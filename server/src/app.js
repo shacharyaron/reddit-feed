@@ -1,6 +1,7 @@
 const requestsLogger = require("./middleware/requestsLogger");
 const errorHandler = require("./middleware/errorHandler");
 const routeDoesNotExistHandler = require("./middleware/routeDoesNotExistHandler");
+const cors = require('cors');
 const express = require('express');
 const logger = require("./utils/logger");
 const subredditRouter = require('./routes/subredditsRouter');
@@ -8,6 +9,7 @@ const subredditRouter = require('./routes/subredditsRouter');
 const port = process.env.PORT || 5000;
 
 const app = express();
+app.use(cors());
 app.use(express.json());
 
 app.use(requestsLogger)
