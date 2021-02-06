@@ -44,7 +44,7 @@ const SearchBar = props => {
             </div>
 
             < div className='search-bar-input-container'>
-                <input type="text" id='search-bar' placeholder='Search'
+                <input type="text" id='search-bar' placeholder='Search' autoComplete="off"
                        onChange={event => setSubreddit(event.target.value)}
                        onKeyPress={handleKeyPress}
                 />
