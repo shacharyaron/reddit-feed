@@ -2,8 +2,6 @@ import React, {useState} from 'react';
 import './css/SearchBar.css';
 import axios from 'axios';
 
-//todo: change to production url or do || with env variable
-const BASE_API_URL = 'http://localhost:5000/api/v1'
 const ENTER_KEY = 'Enter';
 
 const SearchBar = props => {
@@ -14,7 +12,7 @@ const SearchBar = props => {
         let response;
         try {
             response = await axios.get(
-                `${BASE_API_URL}/subreddits/${subreddit}/top`,
+                `/api/v1/subreddits/${subreddit}/top`,
                 {
                     params: {
                         'limit': 10
@@ -40,7 +38,8 @@ const SearchBar = props => {
     return (
         < div className='search-bar-container shadow'>
 
-            < div className='logo-container'>
+            < div className='logo-container not-selectable'>
+                <img id='logo' src={`${process.env.PUBLIC_URL}/images/logo128.png`}/>
                 <h1>reddit</h1>
             </div>
 
