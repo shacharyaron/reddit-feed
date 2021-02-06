@@ -1,4 +1,4 @@
-const redditService = require('../server/src/services/redditService');
+const redditService = require('../src/services/redditService');
 const assert = require('chai').assert
 
 
