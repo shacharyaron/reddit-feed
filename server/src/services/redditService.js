@@ -1,6 +1,7 @@
 const axios = require('axios');
 const ApiError = require("../errors/ApiError");
 const logger = require("../utils/logger");
+const validUrl = require('valid-url');
 
 const REDDIT_URL = "https://www.reddit.com";
 
@@ -41,7 +42,7 @@ const parse = (response) => {
                 createdTimestamp: article.data.created_utc,
                 upvotes: article.data.ups,
                 url: article.data.url,
-                thumbnail: article.data.thumbnail || null, //todo if not url return null
+                thumbnail: validUrl.isUri(article.data.thumbnail) ? article.data.thumbnail : null,
             };
         });
 
