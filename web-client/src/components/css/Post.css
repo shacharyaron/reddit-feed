@@ -1,0 +1,28 @@
+.post-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+    margin: 20px;
+    background-color: rgb(239, 239, 239);
+}
+
+.post-header {
+    background-color: rgb(219, 219, 219);
+    width: 100%;
+}
+
+
+.post-content {
+    padding: 20px;
+
+}
+
+.post-information {
+    display: flex;
+    flex-direction: row;
+    background-color: rgb(219, 219, 219);
+    width: 100%;
+}
