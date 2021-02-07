@@ -4,14 +4,23 @@ import './css/Post.css';
 const Post = props => {
 
     const isImage = (url) => {
-        return (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+        try {
+            return (url.match(/\.(jpeg|jpg|gif|png)$/) != null);
+        } catch (error) {
+            return false;
+        }
     }
 
     const isLinkToOriginalPost = (url) => {
-        return (url.startsWith("https://www.reddit.com/r/"));
+        try {
+            return (url.startsWith("https://www.reddit.com/r/"));
+        } catch (error) {
+            return false;
+        }
     }
 
     const convertTimestampToLocalDate = (timestamp) => {
+        if (!timestamp) return null;
         const epochTime = new Date(1970, 0, 1);
         epochTime.setSeconds(timestamp);
         return epochTime.toDateString();
@@ -48,7 +57,7 @@ const Post = props => {
             <div className='post-information'>
 
                 <div className='author-date-container'>
-                    <h3 id='author'>Posted by {props.author}</h3>
+                    <h3 id='author'>{props.author}</h3>
                     <h3 id='created-date'>{convertTimestampToLocalDate(props.createdTimestamp)}</h3>
                 </div>
 

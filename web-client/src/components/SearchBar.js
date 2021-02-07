@@ -9,6 +9,8 @@ const SearchBar = props => {
     const [subreddit, setSubreddit] = useState(null);
 
     const sendSearchRequest = async (subreddit) => {
+        if (!subreddit) return [];
+
         let response;
         try {
             response = await axios.get(
@@ -19,12 +21,29 @@ const SearchBar = props => {
                     }
                 });
         } catch (error) {
-            //todo: handle errors
-            console.log(error);
-            return [];
+            return generateErrorMessage(error, subreddit)
         }
 
         return response.data.articles;
+    }
+
+    const generateErrorMessage = (error, subreddit) => {
+        let message;
+        switch (error.response.statusText) {
+            case 'Not Found':
+                message = `Subreddit '${subreddit}' does not exist.`
+                break;
+            case 'Forbidden':
+                message = `${subreddit} is private.`
+                break;
+            default:
+                message = 'Unexpected problem.'
+                break;
+        }
+        return [{
+            title: "We couldn't make that request :(",
+            text: message
+        }];
     }
 
     const handleKeyPress = async (event) => {
@@ -40,7 +59,7 @@ const SearchBar = props => {
 
             < div className='logo-container not-selectable'>
                 <img id='logo' src={`${process.env.PUBLIC_URL}/images/logo128.png`}/>
-                <h1 id ='logo-text'>reddit</h1>
+                <h1 id='logo-text'>reddit</h1>
             </div>
 
             < div className='search-bar-input-container'>
