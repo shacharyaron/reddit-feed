@@ -5,7 +5,11 @@ import {useState} from "react";
 
 const App = () => {
 
-    const [posts, setPosts] = useState([]);
+    const [posts, setPosts] = useState([{
+        title: 'Hey there! 👋',
+        text: `Enter a subreddit name in the search bar to see its top posts.`,
+        url: `${process.env.PUBLIC_URL}/images/welcome.gif`
+    }]);
 
     const updatePosts = (posts) => {
         setPosts(posts)
