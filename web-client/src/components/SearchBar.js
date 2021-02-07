@@ -1,14 +1,17 @@
 import React, {useState} from 'react';
 import './css/SearchBar.css';
 import axios from 'axios';
+import Loader from "react-loader-spinner";
 
 const ENTER_KEY = 'Enter';
 
 const SearchBar = props => {
 
     const [subreddit, setSubreddit] = useState(null);
+    const [isLoading, setIsLoading] = useState(false);
 
     const sendSearchRequest = async (subreddit) => {
+        setIsLoading(true);
         if (!subreddit) return [];
 
         let response;
@@ -22,6 +25,8 @@ const SearchBar = props => {
                 });
         } catch (error) {
             return generateErrorMessage(error, subreddit)
+        } finally {
+            setIsLoading(false);
         }
 
         return response.data.articles;
@@ -34,14 +39,14 @@ const SearchBar = props => {
                 message = `Subreddit '${subreddit}' does not exist.`
                 break;
             case 'Forbidden':
-                message = `${subreddit} is private.`
+                message = `Subreddit '${subreddit}' is private.`
                 break;
             default:
                 message = 'Unexpected problem.'
                 break;
         }
         return [{
-            title: "We couldn't make that request :(",
+            title: "We couldn't make that request 😞",
             text: message
         }];
     }
@@ -69,6 +74,19 @@ const SearchBar = props => {
                 />
             </div>
 
+            {/*<div className='loading-container'>*/}
+            {/*    <img className='loading'*/}
+            {/*         style={{display: isLoading ? 'block' : 'none'}}*/}
+            {/*         src={`${process.env.PUBLIC_URL}/images/loading.gif`}/>*/}
+            {/*</div>*/}
+            <Loader
+                className='loading'
+                type="ThreeDots"
+                color="#586183"
+                height={30}
+                width={30}
+                style={{display: isLoading ? 'block' : 'none'}}
+            />
         </div>
     );
 
