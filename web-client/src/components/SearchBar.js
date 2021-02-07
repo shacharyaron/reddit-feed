@@ -40,7 +40,7 @@ const SearchBar = props => {
 
             < div className='logo-container not-selectable'>
                 <img id='logo' src={`${process.env.PUBLIC_URL}/images/logo128.png`}/>
-                <h1>reddit</h1>
+                <h1 id ='logo-text'>reddit</h1>
             </div>
 
             < div className='search-bar-input-container'>

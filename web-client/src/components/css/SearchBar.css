@@ -19,7 +19,7 @@
     padding: 15px;
 }
 
-.search-bar-input-container{
+.search-bar-input-container {
     width: 50%;
 }
 
@@ -52,4 +52,9 @@
     -moz-user-select: none;
     -ms-user-select: none;
     user-select: none;
+}
+
+#logo-text {
+    font-size: 25px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue', sans-serif;
 }

@@ -35,7 +35,7 @@ const Post = props => {
         <article className='post-container shadow'>
 
             <div className='post-header'>
-                <h1>{props.title}</h1>
+                <h1 id={'title'}>{props.title}</h1>
             </div>
 
             <div className='post-content'>
