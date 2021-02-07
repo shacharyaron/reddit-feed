@@ -74,11 +74,6 @@ const SearchBar = props => {
                 />
             </div>
 
-            {/*<div className='loading-container'>*/}
-            {/*    <img className='loading'*/}
-            {/*         style={{display: isLoading ? 'block' : 'none'}}*/}
-            {/*         src={`${process.env.PUBLIC_URL}/images/loading.gif`}/>*/}
-            {/*</div>*/}
             <Loader
                 className='loading'
                 type="ThreeDots"
@@ -87,6 +82,7 @@ const SearchBar = props => {
                 width={30}
                 style={{display: isLoading ? 'block' : 'none'}}
             />
+
         </div>
     );
 
