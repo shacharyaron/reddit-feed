@@ -9,6 +9,7 @@
     width: 100%;
     backdrop-filter: blur(20px);
     background-color: rgb(255, 255, 255);
+    z-index:1000;
 }
 
 .logo-container {

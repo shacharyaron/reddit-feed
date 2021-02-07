@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import './css/PostsList.css';
 import Post from "./Post";
 

@@ -1,10 +1,11 @@
 .posts-list-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: start;
     align-items: center;
     height: 100%;
     width: 70%;
     padding: 20px 120px;
+    min-height: 85vh;
     background-color: rgb(247, 250, 255);
 }
