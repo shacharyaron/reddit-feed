@@ -12,7 +12,6 @@ const getTopArticlesFromSubreddit = async (subreddit, limit) => {
             `${REDDIT_URL}/r/${subreddit}/top/.json`,
             {
                 params: {
-                    't': 'all',
                     'limit': limit
                 }
             });
