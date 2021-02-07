@@ -7,9 +7,8 @@
     padding-bottom: 20px;
     height: 75px;
     width: 100%;
-    backdrop-filter: blur(20px);
     background-color: rgb(255, 255, 255);
-    z-index:1000;
+    z-index: 1000;
 }
 
 .logo-container {
@@ -22,6 +21,10 @@
 
 .search-bar-input-container {
     width: 50%;
+}
+
+#search-bar:hover {
+    background-color: rgb(243, 249, 255);
 }
 
 #search-bar {
