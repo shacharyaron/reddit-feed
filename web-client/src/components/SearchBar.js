@@ -9,6 +9,7 @@ const SearchBar = props => {
 
     const [subreddit, setSubreddit] = useState(null);
     const [isLoading, setIsLoading] = useState(false);
+    const [error, setError] = useState(null);
 
     const sendSearchRequest = async (subreddit) => {
         setIsLoading(true);
@@ -54,9 +55,21 @@ const SearchBar = props => {
     const handleKeyPress = async (event) => {
         if (event.key === ENTER_KEY) {
             const subreddit = event.target.value;
+            if (!isValidSubreddit(subreddit)) return;
             const apiResponse = await sendSearchRequest(subreddit);
             props.onDataChanged(apiResponse);
+        } else {
+            setError(null);
         }
+    }
+
+    const isValidSubreddit = (subreddit) => {
+        let errorMessage = null;
+        if (!subreddit) errorMessage = "Subreddit cannot be empty.";
+        if (/\s/.test(subreddit)) errorMessage = 'Subreddit must not contain white spaces.';
+        if (subreddit.length > 21) errorMessage = 'Subreddit exceeds 21 characters.';
+        setError(errorMessage);
+        return !errorMessage;
     }
 
     return (
@@ -73,6 +86,8 @@ const SearchBar = props => {
                        onKeyPress={handleKeyPress}
                 />
             </div>
+
+            <h1 key={subreddit} id='searchbar-error' style={{display: error ? 'block' : 'none'}}>{error}</h1>
 
             <Loader
                 className='loading'
