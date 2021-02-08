@@ -11,7 +11,7 @@ or make a request to the REST API:
 /GET https://reddit-server-shachar-yaron.herokuapp.com/api/v1/subreddits/{subreddit}/top?limit=10
 ```
 
-## Running locallly
+## Running locally
 
 to start the server on port 5000 run:
 ```
@@ -36,7 +36,7 @@ or to call the server:
 
 # App Overview
 1. An HTTP request is sent from the client to the server.<br>
-2. The request is received by the server and goes through some middlewares (loggers and error handlers) and then proceeds to the router and to the controller.<br>
+2. The request is received by the server and goes through some middleware (loggers and error handlers) and then proceeds to the router and to the controller.<br>
 3. The controller calls the subredditsService (HTTP/Express context ends here - the service contains only business logic).<br>
 4. The service calls Reddit API.<br>
 5. The service parses the response.<br>
