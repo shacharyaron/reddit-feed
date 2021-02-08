@@ -1,9 +1,11 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import './css/SearchBar.css';
 import axios from 'axios';
 import Loader from "react-loader-spinner";
 
 const ENTER_KEY = 'Enter';
+const BACKSPACE_KEY = 'Delete';
+const DELETE_KEY = 'Backspace';
 
 const SearchBar = props => {
 
@@ -58,19 +60,24 @@ const SearchBar = props => {
             if (!isValidSubreddit(subreddit)) return;
             const apiResponse = await sendSearchRequest(subreddit);
             props.onDataChanged(apiResponse);
-        } else {
+        } else if (event.key === BACKSPACE_KEY || event.key === DELETE_KEY) {
             setError(null);
         }
     }
 
     const isValidSubreddit = (subreddit) => {
         let errorMessage = null;
+        if (!/^[a-zA-Z0-9_-]*$/.test(subreddit)) errorMessage = 'Illegal characters are not allowed.';
         if (!subreddit) errorMessage = "Subreddit cannot be empty.";
-        if (/\s/.test(subreddit)) errorMessage = 'Subreddit must not contain white spaces.';
+        if (/\s/.test(subreddit)) errorMessage = 'Whitespaces are not allowed.';
         if (subreddit.length > 21) errorMessage = 'Subreddit exceeds 21 characters.';
         setError(errorMessage);
         return !errorMessage;
     }
+
+    useEffect(() => {
+        document.addEventListener('keydown', handleKeyPress, false);
+    }, []);
 
     return (
         < div className='search-bar-container shadow'>
