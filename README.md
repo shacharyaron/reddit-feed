@@ -44,11 +44,11 @@ or to call the server:
 
 Diagram to illustrate:<br>
 <kbd>
-  <img width=860px src="*image-for-design-diagram-here*">
+  <img width=860px src="https://i.imgur.com/ggHNQfW.jpeg">
 </kbd>  
 
 <br>
-The diagram is also available at: <*diagram-url*>.
+The diagram is also available at: https://i.imgur.com/ggHNQfW.jpeg
 <br>
 
 # Tests 
